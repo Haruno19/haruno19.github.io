@@ -9,6 +9,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+  # Rebuilds daily so new releases and repos reach the feed
+  schedule:
+    - cron: '17 5 * * *'
+
 # Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
   contents: read
@@ -39,6 +43,9 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+        env:
+          # Fetches repos, releases and pinned repos (scripts/fetch-github.ts)
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
       - name: Upload artifact

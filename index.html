@@ -2,12 +2,53 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>haruno19.github.io</title>
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>haru.dev</title>
+    <meta name="description" content="Releases, new repos and other news from my GitHub." />
+    <script>
+      // Before paint, so a saved theme doesn't flash the default one.
+      try {
+        const theme = localStorage.getItem('theme')
+        if (theme) document.documentElement.dataset.theme = theme
+      } catch {}
+    </script>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="app">
+      <aside class="side">
+        <a class="mascot" id="mascot" href="#" aria-label="Home"></a>
+        <nav class="nav" id="nav" aria-label="Links"></nav>
+        <a class="cta" id="cta" href="#"></a>
+      </aside>
+
+      <main class="main">
+        <div class="banner" id="banner" role="img"></div>
+        <p class="sub" id="sub"></p>
+
+        <section class="featured" id="featured" aria-label="Pinned repositories"></section>
+
+        <section class="feed" aria-label="Latest from GitHub">
+          <div class="tabs" id="tabs"></div>
+          <div id="feed"></div>
+          <div class="load-row" id="load">
+            <span></span>
+            <button class="lm" type="button">LOAD MORE</button>
+            <span class="hint"><span id="updated"></span> · /feed for more</span>
+          </div>
+        </section>
+
+        <div class="out" id="out" aria-live="polite"></div>
+
+        <form class="term" id="term" autocomplete="off">
+          <div class="suggest menu" id="suggest" hidden></div>
+          <label class="user" id="user" for="input"></label>
+          <span class="gt">&gt;</span>
+          <input class="input" id="input" spellcheck="false" autocapitalize="off" aria-label="Terminal input" />
+        </form>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

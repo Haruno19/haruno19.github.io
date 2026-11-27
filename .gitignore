@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Written by scripts/fetch-github.ts before dev and build
+src/data/github.json
